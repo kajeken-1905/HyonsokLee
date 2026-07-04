@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MLB 일정 &amp; 결과</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700&family=Oswald:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="layout">
+    <aside class="standings-sidebar standings-left" aria-label="네셔널 리그 순위">
+      <div class="standings-panel">
+        <h2 class="standings-league-title nl">National League</h2>
+        <p class="standings-league-sub">네셔널 리그</p>
+        <div id="nlStandings" class="standings-content">
+          <div class="standings-loading">순위 불러오는 중...</div>
+        </div>
+      </div>
+    </aside>
+
+    <div class="page main-content">
+    <header class="header">
+      <div class="header-inner">
+        <div class="brand">
+          <img
+            class="brand-icon"
+            src="https://www.mlbstatic.com/team-logos/league-on-dark/1.svg"
+            alt="MLB"
+            width="52"
+            height="52"
+          />
+          <div>
+            <h1>MLB 일정 &amp; 결과</h1>
+            <p class="subtitle">메이저리그 매일의 경기 일정과 스코어</p>
+          </div>
+        </div>
+        <div class="header-meta">
+          <span class="season-badge" id="seasonBadge">2026 시즌</span>
+          <button type="button" class="btn-refresh" id="refreshBtn" title="새로고침">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M21 12a9 9 0 1 1-3-6.7"/><polyline points="21 3 21 9 15 9"/>
+            </svg>
+            새로고침
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <section class="date-bar">
+      <button type="button" class="nav-btn" id="prevDayBtn" aria-label="이전 날짜">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <polyline points="15 18 9 12 15 6"/>
+        </svg>
+      </button>
+
+      <div class="date-picker-wrap">
+        <input type="date" id="dateInput" class="date-input" />
+        <button type="button" class="btn-today" id="todayBtn">오늘</button>
+      </div>
+
+      <button type="button" class="nav-btn" id="nextDayBtn" aria-label="다음 날짜">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <polyline points="9 18 15 12 9 6"/>
+        </svg>
+      </button>
+    </section>
+
+    <p class="display-date" id="displayDate"></p>
+
+    <section class="summary" id="summary" hidden>
+      <div class="summary-card">
+        <span class="summary-value" id="totalGames">0</span>
+        <span class="summary-label">전체 경기</span>
+      </div>
+      <div class="summary-card live">
+        <span class="summary-value" id="liveGames">0</span>
+        <span class="summary-label">진행 중</span>
+      </div>
+      <div class="summary-card done">
+        <span class="summary-value" id="finalGames">0</span>
+        <span class="summary-label">종료</span>
+      </div>
+      <div class="summary-card upcoming">
+        <span class="summary-value" id="scheduledGames">0</span>
+        <span class="summary-label">예정</span>
+      </div>
+    </section>
+
+    <div class="state state-loading" id="loadingState">
+      <div class="spinner"></div>
+      <p>경기 정보를 불러오는 중...</p>
+    </div>
+
+    <div class="state state-error" id="errorState" hidden>
+      <p id="errorMessage">데이터를 불러오지 못했습니다.</p>
+      <button type="button" class="btn-retry" id="retryBtn">다시 시도</button>
+    </div>
+
+    <div class="state state-empty" id="emptyState" hidden>
+      <span class="empty-icon" aria-hidden="true">📅</span>
+      <p>이 날짜에는 MLB 경기가 없습니다.</p>
+    </div>
+
+    <main class="games" id="gamesContainer"></main>
+
+    <footer class="footer">
+      <p>데이터 제공: <a href="https://statsapi.mlb.com/" target="_blank" rel="noopener noreferrer">MLB Stats API</a></p>
+      <p class="footer-note">시간은 한국 시간(KST)으로 표시됩니다.</p>
+    </footer>
+    </div>
+
+    <aside class="standings-sidebar standings-right" aria-label="아메리칸 리그 순위">
+      <div class="standings-panel">
+        <h2 class="standings-league-title al">American League</h2>
+        <p class="standings-league-sub">아메리칸 리그</p>
+        <div id="alStandings" class="standings-content">
+          <div class="standings-loading">순위 불러오는 중...</div>
+        </div>
+      </div>
+    </aside>
+  </div>
+
+  <div class="modal-overlay" id="gameModal" hidden>
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <button type="button" class="modal-close" id="modalCloseBtn" aria-label="닫기">&times;</button>
+      <div id="modalContent" class="modal-content"></div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
