@@ -38,6 +38,12 @@
           </div>
         </div>
         <div class="header-meta">
+          <a href="daegu-food.html" class="btn-daegu-food" title="대구광역시 맛집">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/>
+            </svg>
+            대구 맛집
+          </a>
           <span class="season-badge" id="seasonBadge">2026 시즌</span>
           <button type="button" class="btn-refresh" id="refreshBtn" title="새로고침">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -130,8 +136,59 @@
     </div>
   </div>
 
-  <!-- MLB AI 챗봇 -->
-  <div class="chatbot" id="chatbot">
+  <!-- 플로팅 AI 버튼 -->
+  <div class="floating-actions">
+    <!-- AI 이미지 생성봇 -->
+    <div class="imagebot" id="imagebot">
+      <div class="imagebot-panel" id="imagebotPanel" hidden>
+        <header class="imagebot-header">
+          <div class="imagebot-header-info">
+            <span class="imagebot-avatar" aria-hidden="true">🎨</span>
+            <div>
+              <h2 class="imagebot-title">AI 이미지 생성</h2>
+              <p class="imagebot-subtitle">GPT Image · 프롬프트로 그림 만들기</p>
+            </div>
+          </div>
+          <button type="button" class="imagebot-icon-btn" id="imagebotCloseBtn" title="닫기" aria-label="이미지 생성봇 닫기">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+            </svg>
+          </button>
+        </header>
+
+        <p class="imagebot-status" id="imagebotStatus">프롬프트를 입력하고 이미지를 생성하세요.</p>
+
+        <form class="imagebot-form" id="imagebotForm">
+          <label class="imagebot-label" for="imagebotPrompt">프롬프트</label>
+          <textarea
+            id="imagebotPrompt"
+            class="imagebot-textarea"
+            rows="4"
+            placeholder="예: 야구장에서 홈런을 치는 곰 캐릭터 일러스트, 밝은 만화 스타일"
+            maxlength="4000"
+            aria-label="이미지 생성 프롬프트"
+          ></textarea>
+          <button type="submit" class="imagebot-generate-btn" id="imagebotGenerateBtn">이미지 생성</button>
+        </form>
+
+        <section class="imagebot-gallery-section" aria-label="생성된 이미지 갤러리">
+          <h3 class="imagebot-gallery-title">생성된 이미지</h3>
+          <div class="imagebot-gallery" id="imagebotGallery">
+            <p class="imagebot-gallery-empty" id="imagebotGalleryEmpty">아직 생성된 이미지가 없습니다.</p>
+          </div>
+        </section>
+      </div>
+
+      <button type="button" class="imagebot-toggle" id="imagebotToggle" aria-label="AI 이미지 생성 열기" aria-expanded="false">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/>
+        </svg>
+        <span class="imagebot-toggle-label">AI 이미지</span>
+      </button>
+    </div>
+
+    <!-- MLB AI 챗봇 -->
+    <div class="chatbot" id="chatbot">
     <div class="chatbot-panel" id="chatbotPanel" hidden>
       <header class="chatbot-header">
         <div class="chatbot-header-info">
@@ -170,7 +227,7 @@
           <option value="gpt-4o">gpt-4o</option>
           <option value="gpt-3.5-turbo">gpt-3.5-turbo</option>
         </select>
-        <p class="chatbot-settings-note">API 키는 브라우저에만 저장됩니다. 공개 배포 시 서버 프록시 사용을 권장합니다.</p>
+        <p class="chatbot-settings-note">API 키는 챗봇·이미지 생성봇이 공유하며 브라우저에만 저장됩니다. 공개 배포 시 서버 프록시 사용을 권장합니다.</p>
         <button type="button" class="chatbot-save-btn" id="chatbotSaveKeyBtn">저장</button>
       </div>
 
@@ -199,9 +256,22 @@
       </svg>
       <span class="chatbot-toggle-label">MLB AI</span>
     </button>
+    </div>
   </div>
 
+  <!-- 이미지 라이트박스 -->
+  <div class="imagebot-lightbox" id="imagebotLightbox" hidden>
+    <div class="imagebot-lightbox-inner">
+      <button type="button" class="imagebot-lightbox-close" id="imagebotLightboxClose" aria-label="닫기">&times;</button>
+      <img id="imagebotLightboxImg" class="imagebot-lightbox-img" alt="" />
+      <p class="imagebot-lightbox-caption" id="imagebotLightboxCaption"></p>
+      <button type="button" class="imagebot-lightbox-download" id="imagebotLightboxDownload">PNG 다운로드</button>
+    </div>
+  </div>
+
+  <script src="openai-shared.js?v=2"></script>
   <script src="app.js"></script>
-  <script src="chatbot.js"></script>
+  <script src="chatbot.js?v=2"></script>
+  <script src="imagebot.js?v=2"></script>
 </body>
 </html>

@@ -1,6 +1,4 @@
 const OPENAI_API_URL = "https://api.openai.com/v1/chat/completions";
-const STORAGE_KEY = "mlb_chatbot_openai_key";
-const MODEL_KEY = "mlb_chatbot_openai_model";
 
 const SYSTEM_PROMPT = `당신은 MLB(메이저리그 야구) 전문 AI 어시스턴트입니다.
 사용자는 MLB 일정·결과·순위·선수 기록 페이지를 보고 있습니다.
@@ -30,11 +28,21 @@ let conversationHistory = [];
 let isSending = false;
 
 function getApiKey() {
-  return localStorage.getItem(STORAGE_KEY) || "";
+  return OpenAIConfig.getApiKey();
 }
 
 function getModel() {
-  return localStorage.getItem(MODEL_KEY) || "gpt-4o-mini";
+  return OpenAIConfig.getModel();
+}
+
+function closeOtherPanels() {
+  const imagebotPanel = document.getElementById("imagebotPanel");
+  const imagebotToggle = document.getElementById("imagebotToggle");
+  if (imagebotPanel && !imagebotPanel.hidden) {
+    imagebotPanel.hidden = true;
+    imagebotToggle.hidden = false;
+    imagebotToggle.setAttribute("aria-expanded", "false");
+  }
 }
 
 function saveSettings() {
@@ -46,10 +54,10 @@ function saveSettings() {
     return;
   }
 
-  localStorage.setItem(STORAGE_KEY, key);
-  localStorage.setItem(MODEL_KEY, model);
+  OpenAIConfig.saveApiKey(key);
+  OpenAIConfig.saveModel(model);
   chatbotElements.settings.hidden = true;
-  appendSystemMessage("API 키가 저장되었습니다. 이제 질문을 보낼 수 있습니다.");
+  appendSystemMessage("API 키가 저장되었습니다. 챗봇과 이미지 생성봇 모두 사용할 수 있습니다.");
 }
 
 function loadSettings() {
@@ -111,6 +119,7 @@ function setSending(sending) {
 }
 
 function openPanel() {
+  closeOtherPanels();
   chatbotElements.panel.hidden = false;
   chatbotElements.toggle.setAttribute("aria-expanded", "true");
   chatbotElements.toggle.hidden = true;

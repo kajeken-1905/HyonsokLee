@@ -463,6 +463,27 @@ body {
   font-weight: 600;
 }
 
+.btn-daegu-food {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 14px;
+  border: 1px solid rgba(245, 158, 11, 0.35);
+  border-radius: 999px;
+  background: rgba(245, 158, 11, 0.12);
+  color: #fcd34d;
+  font-family: inherit;
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background 0.2s, border-color 0.2s;
+}
+
+.btn-daegu-food:hover {
+  background: rgba(245, 158, 11, 0.2);
+  border-color: rgba(245, 158, 11, 0.5);
+}
+
 .btn-refresh {
   display: inline-flex;
   align-items: center;
@@ -1273,13 +1294,22 @@ body {
   }
 }
 
-/* Chatbot */
-.chatbot {
+/* Floating AI actions */
+.floating-actions {
   position: fixed;
   right: 20px;
   bottom: 20px;
   z-index: 1100;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 10px;
   font-family: "Noto Sans KR", sans-serif;
+}
+
+/* Chatbot */
+.chatbot {
+  position: relative;
 }
 
 .chatbot-toggle {
@@ -1309,6 +1339,9 @@ body {
 }
 
 .chatbot-panel {
+  position: fixed;
+  right: 20px;
+  bottom: 88px;
   display: flex;
   flex-direction: column;
   width: min(380px, calc(100vw - 32px));
@@ -1602,16 +1635,18 @@ body {
 }
 
 @media (max-width: 480px) {
-  .chatbot {
+  .floating-actions {
     right: 12px;
     bottom: 12px;
   }
 
-  .chatbot-toggle-label {
+  .chatbot-toggle-label,
+  .imagebot-toggle-label {
     display: none;
   }
 
-  .chatbot-toggle {
+  .chatbot-toggle,
+  .imagebot-toggle {
     width: 56px;
     height: 56px;
     padding: 0;
@@ -1619,8 +1654,383 @@ body {
     border-radius: 50%;
   }
 
-  .chatbot-panel {
+  .chatbot-panel,
+  .imagebot-panel {
+    right: 12px;
+    bottom: 132px;
     width: calc(100vw - 24px);
-    height: calc(100vh - 80px);
+    height: calc(100vh - 150px);
   }
+}
+
+/* Image bot */
+.imagebot {
+  position: relative;
+}
+
+.imagebot-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 18px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 999px;
+  background: linear-gradient(135deg, var(--blue) 0%, #2563eb 100%);
+  color: #fff;
+  font-family: inherit;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 8px 32px rgba(59, 130, 246, 0.4);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.imagebot-toggle:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 40px rgba(59, 130, 246, 0.5);
+}
+
+.imagebot-toggle[aria-expanded="true"] {
+  display: none;
+}
+
+.imagebot-panel {
+  position: fixed;
+  right: 20px;
+  bottom: 88px;
+  display: flex;
+  flex-direction: column;
+  width: min(420px, calc(100vw - 32px));
+  height: min(640px, calc(100vh - 100px));
+  border-radius: var(--radius);
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+  overflow: hidden;
+  animation: chatbotIn 0.25s ease;
+}
+
+.imagebot-panel[hidden] {
+  display: none;
+}
+
+.imagebot-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 14px 16px;
+  background: rgba(0, 0, 0, 0.3);
+  border-bottom: 1px solid var(--border);
+  flex-shrink: 0;
+}
+
+.imagebot-header-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+}
+
+.imagebot-avatar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  background: var(--blue-soft);
+  font-size: 1.2rem;
+  flex-shrink: 0;
+}
+
+.imagebot-title {
+  margin: 0;
+  font-family: "Oswald", sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+}
+
+.imagebot-subtitle {
+  margin: 2px 0 0;
+  font-size: 0.72rem;
+  color: var(--text-muted);
+}
+
+.imagebot-icon-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: transparent;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+}
+
+.imagebot-icon-btn:hover {
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--text);
+}
+
+.imagebot-status {
+  margin: 0;
+  padding: 10px 16px;
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  background: rgba(0, 0, 0, 0.15);
+  border-bottom: 1px solid var(--border);
+  flex-shrink: 0;
+}
+
+.imagebot-status.warn {
+  color: #fcd34d;
+}
+
+.imagebot-status.error {
+  color: #fca5a5;
+}
+
+.imagebot-status.success {
+  color: #86efac;
+}
+
+.imagebot-status.loading {
+  color: #93c5fd;
+}
+
+.imagebot-form {
+  padding: 14px 16px;
+  border-bottom: 1px solid var(--border);
+  flex-shrink: 0;
+}
+
+.imagebot-label {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--text-muted);
+}
+
+.imagebot-textarea {
+  width: 100%;
+  min-height: 96px;
+  margin-bottom: 10px;
+  padding: 10px 12px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--bg);
+  color: var(--text);
+  font-family: inherit;
+  font-size: 0.88rem;
+  line-height: 1.5;
+  resize: vertical;
+}
+
+.imagebot-textarea:focus {
+  outline: 2px solid var(--blue);
+  outline-offset: 0;
+}
+
+.imagebot-textarea:disabled {
+  opacity: 0.6;
+}
+
+.imagebot-generate-btn {
+  width: 100%;
+  padding: 11px;
+  border: none;
+  border-radius: 10px;
+  background: var(--blue);
+  color: #fff;
+  font-family: inherit;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.imagebot-generate-btn:hover:not(:disabled) {
+  opacity: 0.92;
+}
+
+.imagebot-generate-btn:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.imagebot-gallery-section {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  padding: 14px 16px 16px;
+}
+
+.imagebot-gallery-title {
+  margin: 0 0 10px;
+  font-family: "Oswald", sans-serif;
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.imagebot-gallery {
+  flex: 1;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.imagebot-gallery-empty {
+  margin: 0;
+  padding: 28px 12px;
+  text-align: center;
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  border: 1px dashed var(--border);
+  border-radius: 12px;
+}
+
+.imagebot-card {
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  overflow: hidden;
+  background: rgba(0, 0, 0, 0.2);
+}
+
+.imagebot-card-preview {
+  display: block;
+  width: 100%;
+  padding: 0;
+  border: none;
+  background: transparent;
+  cursor: zoom-in;
+}
+
+.imagebot-card-preview img {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 220px;
+  object-fit: cover;
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.imagebot-card-body {
+  padding: 10px 12px;
+}
+
+.imagebot-card-prompt {
+  margin: 0 0 8px;
+  font-size: 0.8rem;
+  line-height: 1.45;
+  color: var(--text);
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.imagebot-card-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  font-size: 0.72rem;
+  color: var(--text-muted);
+}
+
+.imagebot-download-btn {
+  padding: 4px 10px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--text);
+  font-family: inherit;
+  font-size: 0.72rem;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.imagebot-download-btn:hover {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.imagebot-lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 1200;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px 16px;
+  background: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(4px);
+}
+
+.imagebot-lightbox[hidden] {
+  display: none;
+}
+
+.imagebot-lightbox-inner {
+  position: relative;
+  width: min(900px, 100%);
+  max-height: calc(100vh - 48px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.imagebot-lightbox-close {
+  position: absolute;
+  top: -8px;
+  right: 0;
+  width: 36px;
+  height: 36px;
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.5);
+  color: var(--text);
+  font-size: 1.4rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.imagebot-lightbox-img {
+  max-width: 100%;
+  max-height: calc(100vh - 180px);
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+}
+
+.imagebot-lightbox-caption {
+  margin: 0;
+  max-width: 100%;
+  text-align: center;
+  font-size: 0.88rem;
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+
+.imagebot-lightbox-download {
+  padding: 10px 18px;
+  border: none;
+  border-radius: 999px;
+  background: var(--blue);
+  color: #fff;
+  font-family: inherit;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
 }

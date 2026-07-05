@@ -1,0 +1,336 @@
+body.daegu-food-page {
+  --daegu-accent: #f59e0b;
+  --daegu-accent-soft: rgba(245, 158, 11, 0.15);
+  background:
+    radial-gradient(ellipse 80% 50% at 50% -20%, rgba(245, 158, 11, 0.15), transparent),
+    radial-gradient(ellipse 60% 40% at 100% 100%, rgba(196, 30, 58, 0.08), transparent),
+    var(--bg);
+}
+
+.daegu-page {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 24px 16px 48px;
+}
+
+.daegu-header {
+  margin-bottom: 28px;
+}
+
+.daegu-header-inner {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.daegu-back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 14px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: var(--bg-card);
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  text-decoration: none;
+  transition: background 0.2s, color 0.2s;
+}
+
+.daegu-back-link:hover {
+  background: var(--bg-card-hover);
+  color: var(--text);
+}
+
+.daegu-brand {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex: 1;
+  min-width: 200px;
+}
+
+.daegu-brand-icon {
+  font-size: 2.4rem;
+  line-height: 1;
+}
+
+.daegu-brand h1 {
+  margin: 0;
+  font-family: "Oswald", sans-serif;
+  font-size: clamp(1.5rem, 4vw, 2rem);
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+.daegu-subtitle {
+  margin: 4px 0 0;
+  color: var(--text-muted);
+  font-size: 0.9rem;
+}
+
+.daegu-api-badge {
+  padding: 6px 12px;
+  border-radius: 999px;
+  background: var(--daegu-accent-soft);
+  color: #fcd34d;
+  font-size: 0.78rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.daegu-section-title {
+  margin: 0 0 12px;
+  font-family: "Oswald", sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.daegu-district-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+}
+
+.daegu-district-btn {
+  padding: 14px 10px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--bg-card);
+  color: var(--text);
+  font-family: inherit;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s, border-color 0.2s, transform 0.15s;
+}
+
+.daegu-district-btn:hover {
+  background: var(--bg-card-hover);
+  border-color: rgba(245, 158, 11, 0.35);
+  transform: translateY(-1px);
+}
+
+.daegu-district-btn.active {
+  background: var(--daegu-accent-soft);
+  border-color: rgba(245, 158, 11, 0.5);
+  color: #fcd34d;
+  box-shadow: 0 4px 16px rgba(245, 158, 11, 0.2);
+}
+
+.daegu-selected-label {
+  margin: 20px 0 16px;
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 0.95rem;
+}
+
+.daegu-summary {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  margin-bottom: 24px;
+}
+
+.daegu-summary-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 14px 8px;
+  border-radius: 12px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+}
+
+.daegu-summary-value {
+  font-family: "Oswald", sans-serif;
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--daegu-accent);
+  line-height: 1.2;
+}
+
+.daegu-summary-label {
+  margin-top: 2px;
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+.daegu-state {
+  text-align: center;
+  padding: 48px 20px;
+  color: var(--text-muted);
+}
+
+.daegu-error p {
+  color: #f87171;
+  margin-bottom: 16px;
+}
+
+.daegu-empty-icon {
+  font-size: 2.5rem;
+  display: block;
+  margin-bottom: 12px;
+}
+
+.daegu-restaurant-list {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.daegu-restaurant-card {
+  border-radius: var(--radius);
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+  padding: 18px 20px;
+  transition: border-color 0.2s;
+}
+
+.daegu-restaurant-card:hover {
+  border-color: rgba(245, 158, 11, 0.25);
+}
+
+.daegu-card-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+
+.daegu-restaurant-name {
+  margin: 0 0 4px;
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+.daegu-food-category {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 6px;
+  background: var(--daegu-accent-soft);
+  color: #fcd34d;
+  font-size: 0.72rem;
+  font-weight: 600;
+}
+
+.daegu-phone {
+  flex-shrink: 0;
+  padding: 6px 12px;
+  border-radius: 8px;
+  background: rgba(59, 130, 246, 0.15);
+  color: #93c5fd;
+  font-size: 0.82rem;
+  font-weight: 600;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.daegu-phone:hover {
+  background: rgba(59, 130, 246, 0.25);
+}
+
+.daegu-desc {
+  margin: 0 0 12px;
+  font-size: 0.88rem;
+  line-height: 1.55;
+  color: var(--text-muted);
+}
+
+.daegu-card-details {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 10px;
+}
+
+.daegu-info-row {
+  display: grid;
+  grid-template-columns: 72px 1fr;
+  gap: 8px;
+  font-size: 0.82rem;
+}
+
+.daegu-info-label {
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+.daegu-info-value {
+  color: var(--text);
+  line-height: 1.4;
+}
+
+.daegu-menu {
+  margin: 0 0 10px;
+  padding: 10px 12px;
+  border-radius: 8px;
+  background: rgba(0, 0, 0, 0.2);
+  font-size: 0.8rem;
+  line-height: 1.5;
+  color: var(--text-muted);
+}
+
+.daegu-menu strong {
+  color: var(--daegu-accent);
+  margin-right: 6px;
+}
+
+.daegu-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.daegu-tag {
+  padding: 3px 8px;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid var(--border);
+  font-size: 0.68rem;
+  color: var(--text-muted);
+}
+
+.daegu-footer .daegu-server-note {
+  margin-top: 8px;
+  padding: 10px 14px;
+  border-radius: 8px;
+  background: rgba(245, 158, 11, 0.12);
+  border: 1px solid rgba(245, 158, 11, 0.3);
+  color: #fcd34d;
+  font-size: 0.8rem;
+  line-height: 1.5;
+}
+
+.daegu-server-note code {
+  padding: 1px 6px;
+  border-radius: 4px;
+  background: rgba(0, 0, 0, 0.3);
+  font-size: 0.78rem;
+}
+
+.daegu-server-note a {
+  color: #93c5fd;
+}
+
+@media (max-width: 640px) {
+  .daegu-district-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .daegu-card-header {
+    flex-direction: column;
+  }
+
+  .daegu-info-row {
+    grid-template-columns: 1fr;
+    gap: 2px;
+  }
+}

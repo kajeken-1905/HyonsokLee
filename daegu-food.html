@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>대구광역시 맛집</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700&family=Oswald:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="daegu-food.css" />
+</head>
+<body class="daegu-food-page">
+  <div class="daegu-page">
+    <header class="daegu-header">
+      <div class="daegu-header-inner">
+        <a href="index.html" class="daegu-back-link" aria-label="MLB 페이지로 돌아가기">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="15 18 9 12 15 6"/>
+          </svg>
+          메인으로
+        </a>
+        <div class="daegu-brand">
+          <span class="daegu-brand-icon" aria-hidden="true">🍽️</span>
+          <div>
+            <h1>대구광역시 맛집</h1>
+            <p class="daegu-subtitle">구역별 대구 대표 맛집 정보</p>
+          </div>
+        </div>
+        <span class="daegu-api-badge">대구푸드 Open API</span>
+      </div>
+    </header>
+
+    <section class="daegu-district-section" aria-label="구역 선택">
+      <h2 class="daegu-section-title">구역 선택</h2>
+      <div class="daegu-district-grid" id="districtGrid" role="tablist"></div>
+    </section>
+
+    <p class="daegu-selected-label" id="selectedDistrictLabel">구역을 선택해 주세요.</p>
+
+    <section class="daegu-summary" id="foodSummary" hidden>
+      <div class="daegu-summary-card">
+        <span class="daegu-summary-value" id="totalCount">0</span>
+        <span class="daegu-summary-label">맛집 수</span>
+      </div>
+      <div class="daegu-summary-card">
+        <span class="daegu-summary-value" id="categoryCount">0</span>
+        <span class="daegu-summary-label">음식 종류</span>
+      </div>
+    </section>
+
+    <div class="daegu-state daegu-loading" id="loadingState" hidden>
+      <div class="spinner"></div>
+      <p>맛집 정보를 불러오는 중...</p>
+    </div>
+
+    <div class="daegu-state daegu-error" id="errorState" hidden>
+      <p id="errorMessage">데이터를 불러오지 못했습니다.</p>
+      <button type="button" class="btn-retry" id="retryBtn">다시 시도</button>
+    </div>
+
+    <div class="daegu-state daegu-empty" id="emptyState" hidden>
+      <span class="daegu-empty-icon" aria-hidden="true">🍜</span>
+      <p>이 구역에 등록된 맛집이 없습니다.</p>
+    </div>
+
+    <main class="daegu-restaurant-list" id="restaurantList" hidden></main>
+
+    <footer class="footer daegu-footer">
+      <p>데이터 제공: <a href="https://www.daegufood.go.kr/" target="_blank" rel="noopener noreferrer">대구푸드 Open API</a></p>
+      <p class="footer-note">대구광역시 공공 맛집 정보 · 로컬 JSON 데이터 사용</p>
+      <p class="footer-note daegu-server-note" id="serverNote" hidden>
+        ⚠️ 파일을 직접 열면 동작하지 않습니다. <code>start-server.bat</code> 실행 후
+        <a href="http://localhost:8080/daegu-food.html">http://localhost:8080/daegu-food.html</a> 로 접속하세요.
+      </p>
+    </footer>
+  </div>
+
+  <script src="daegu-food.js?v=3"></script>
+</body>
+</html>
